@@ -38,11 +38,11 @@ button {
     visibility: visible;
 }
 
-.modal-backdrop.show .modal-conatiner {
+.modal-backdrop.show .modal-container {
     scale: 1;
 }
 
-.modal-conatiner {
+.modal-container {
     position: relative;
     background: #fff;
     width: min(600px, 90%);
