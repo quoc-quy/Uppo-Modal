@@ -15,7 +15,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 function Modal() {
     this.openModal = (options = {}) => {
-        const { templateId } = options;
+        const { templateId, allowBackdropClose = true } = options;
         const template = $(`#${templateId}`);
 
         if (!template) {
@@ -53,17 +53,24 @@ function Modal() {
             this.closeModal(backdrop);
         };
 
-        backdrop.onclick = (e) => {
-            if (e.target === backdrop) {
-                this.closeModal(backdrop);
-            }
-        };
+        if (allowBackdropClose) {
+            backdrop.onclick = (e) => {
+                if (e.target === backdrop) {
+                    this.closeModal(backdrop);
+                }
+            };
+        }
 
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 this.closeModal(backdrop);
             }
         });
+
+        // Disable scroll
+        document.body.classList.add("no-scroll");
+
+        return backdrop;
     };
 
     this.closeModal = (elementModal) => {
@@ -71,6 +78,9 @@ function Modal() {
         elementModal.ontransitionend = () => {
             elementModal.remove();
         };
+
+        // Enable scroll
+        document.body.classList.remove("no-scroll");
     };
 }
 
@@ -81,11 +91,23 @@ const modal = new Modal();
 $("#open-modal-1").onclick = () => {
     modal.openModal({
         templateId: "modal-1",
+        allowBackdropClose: false,
     });
 };
 
 $("#open-modal-2").onclick = () => {
-    modal.openModal({
+    const modalElement = modal.openModal({
         templateId: "modal-2",
     });
+
+    const form = modalElement.querySelector("#login-from");
+    if (form) {
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            const email = form.querySelector("#email").value.trim();
+            const password = form.querySelector("#password").value.trim();
+            console.log(email);
+            console.log(password);
+        };
+    }
 };
