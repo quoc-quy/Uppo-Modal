@@ -79,13 +79,39 @@ main {
 
 .btn {
     padding: 10px 20px;
-    border: 2px solid #ddd;
+    border: 2px solid #605d5d;
     border-radius: 8px;
 }
 
 .modal-footer {
+    display: flex;
+    justify-content: flex-end;
     padding: 20px 0;
-    background: blue;
+    /* background: blue; */
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background: #747373;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+.modal-btn.primary {
+    background: #6bb2d9;
+}
+
+.modal-btn.danger {
+    background: #d27f4b;
+}
+
+.modal-btn:hover {
+    opacity: 0.9;
+}
+
+.modal-btn + .modal-btn {
+    margin-left: 5px;
 }
 
 .no-scroll {
