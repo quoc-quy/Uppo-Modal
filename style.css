@@ -46,7 +46,7 @@ button {
     position: relative;
     background: #fff;
     width: min(600px, 90%);
-    padding: 30px 25px;
+    padding: 20px 20px 0;
     border-radius: 10px;
     scale: 0;
     transition: scale .3s;
@@ -81,6 +81,11 @@ main {
     padding: 10px 20px;
     border: 2px solid #ddd;
     border-radius: 8px;
+}
+
+.modal-footer {
+    padding: 20px 0;
+    background: blue;
 }
 
 .no-scroll {
