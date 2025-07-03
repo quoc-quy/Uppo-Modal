@@ -1,25 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
-}
-
-body {
-    font-size: 1.6rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-button {
-    border: none;
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-}
-
 .uppo__backdrop {
     position: fixed;
     inset: 0;
@@ -73,10 +51,6 @@ button {
     overflow-y: auto;
 }
 
-main {
-    padding: 20px;
-}
-
 .btn {
     padding: 10px 20px;
     border: 2px solid #605d5d;
@@ -87,31 +61,6 @@ main {
     display: flex;
     justify-content: flex-end;
     padding: 20px 0;
-    /* background: blue; */
-}
-
-.uppo__btn {
-    padding: 10px 20px;
-    border-radius: 4px;
-    background: #747373;
-    color: #fff;
-    font-size: 1.6rem;
-}
-
-.uppo__btn--primary {
-    background: #6bb2d9;
-}
-
-.uppo__btn--danger {
-    background: #d27f4b;
-}
-
-.uppo__btn:hover {
-    opacity: 0.9;
-}
-
-.uppo__btn + .uppo__btn {
-    margin-left: 5px;
 }
 
 .uppo--no-scroll {

@@ -1,6 +1,3 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
 Uppo.elements = [];
 
 function Uppo(options = {}) {
@@ -13,7 +10,7 @@ function Uppo(options = {}) {
         },
         options
     );
-    this.template = $(`#${this.opt.templateId}`);
+    this.template = document.querySelector(`#${this.opt.templateId}`);
 
     if (!this.template) {
         console.error(`#${this.opt.templateId} does not exist!`);
@@ -207,79 +204,4 @@ Uppo.prototype.close = function (destroy = this.opt.destroyOnClose) {
 
 Uppo.prototype.destroy = function () {
     this.close(true);
-};
-
-const modal1 = new Uppo({
-    templateId: "modal-1",
-    // destroyOnClose: false,
-    onOpen: () => {
-        console.log("Modal 1 Opened!!");
-    },
-    onClose: () => {
-        console.log("Modal 1 Closed!!");
-    },
-});
-
-$("#open-modal-1").onclick = () => {
-    modal1.open();
-};
-const modal2 = new Uppo({
-    templateId: "modal-2",
-    footer: true,
-    // cssClass: ["class1", "class2"],
-    onOpen: () => {
-        console.log("Modal 2 Opened!!");
-    },
-    onClose: () => {
-        console.log("Modal 2 Closed!!");
-    },
-    // destroyOnClose: false,
-});
-
-$("#open-modal-2").onclick = () => {
-    const modalElement = modal2.open();
-    const form = modalElement.querySelector("#login-from");
-    if (form) {
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            const email = form.querySelector("#email").value.trim();
-            const password = form.querySelector("#password").value.trim();
-            console.log(email);
-            console.log(password);
-        };
-    }
-};
-
-const modal3 = new Uppo({
-    templateId: "modal-3",
-    footer: true,
-    cssClass: ["class1", "class2"],
-    onOpen: () => {
-        console.log("Modal 3 Opened!!");
-    },
-    onClose: () => {
-        console.log("Modal 3 Closed!!");
-    },
-    // destroyOnClose: false,
-});
-
-modal3.addFooterButton("Danger", "uppo__btn uppo__btn--danger", (e) => {
-    modal3.close();
-});
-
-modal3.addFooterButton("Cancel", "uppo__btn", (e) => {
-    modal3.close();
-});
-
-modal3.addFooterButton(
-    "<span>Agree</span>",
-    "uppo__btn uppo__btn--primary",
-    (e) => {
-        // Something...
-        modal3.close();
-    }
-);
-
-$("#open-modal-3").onclick = () => {
-    modal3.open();
 };
