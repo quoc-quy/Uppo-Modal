@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "minify": "terser uppo.js -o uppo.min.js && csso uppo.css -o uppo.min.css"
+  },
+  "dependencies": {
+    "csso-cli": "^4.0.2",
+    "terser": "^5.43.1"
+  }
+}
