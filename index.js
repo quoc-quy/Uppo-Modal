@@ -59,9 +59,11 @@ function Modal(options = {}) {
         });
 
         if (this.allowButtonClose) {
-            const closeBtn = document.createElement("button");
-            closeBtn.className = "modal-close";
-            closeBtn.innerHTML = "&times;";
+            const closeBtn = this._createButton(
+                "&times;",
+                "modal-close",
+                this.close()
+            );
 
             container.append(closeBtn);
 
@@ -81,13 +83,9 @@ function Modal(options = {}) {
             this._modalFooter = document.createElement("div");
             this._modalFooter.className = "modal-footer";
 
-            if (this._footerContent) {
-                this._modalFooter.innerHTML = this._footerContent;
-            }
+            this._renderFooterContent();
 
-            this._footerButton.forEach((btn) => {
-                this._modalFooter.append(btn);
-            });
+            this._renderFooterButton();
 
             container.append(this._modalFooter);
         }
@@ -119,9 +117,7 @@ function Modal(options = {}) {
             document.addEventListener("keydown", this._handleEscapeKey);
         }
 
-        this._onTransitionEnd(() => {
-            if (typeof onClose === "function") onOpen();
-        });
+        this._onTransitionEnd(onOpen);
 
         // Disable scroll
         document.body.classList.add("no-scroll");
@@ -142,20 +138,39 @@ function Modal(options = {}) {
 
     this.setFooterContent = (html) => {
         this._footerContent = html;
-        if (this._modalFooter) {
-            this._modalFooter.innerHTML = html;
+        this._renderFooterContent();
+    };
+
+    this._footerButtons = [];
+
+    this.addFooterButton = (title, cssClass, callback) => {
+        const button = this._createButton(title, cssClass, callback);
+        this._footerButtons.push(button);
+
+        this._renderFooterButton();
+    };
+
+    this._renderFooterContent = () => {
+        if (this._modalFooter && this._footerContent) {
+            this._modalFooter.innerHTML = this._footerContent;
         }
     };
 
-    this._footerButton = [];
+    this._renderFooterButton = () => {
+        if (this._modalFooter) {
+            this._footerButtons.forEach((btn) => {
+                this._modalFooter.append(btn);
+            });
+        }
+    };
 
-    this.addFooterButton = (title, cssClass, callback) => {
+    this._createButton = (title, cssClass, callback) => {
         const button = document.createElement("button");
         button.className = cssClass;
         button.innerHTML = title;
         button.onclick = callback;
 
-        this._footerButton.push(button);
+        return button;
     };
 
     this._onTransitionEnd = (callback) => {
