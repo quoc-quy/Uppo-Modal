@@ -23,9 +23,9 @@ function Modal(options = {}) {
     this.allowButtonClose = closeMethods.includes("button");
     this.allowEscapesClose = closeMethods.includes("escape");
 
-    function getScrollbarWidth() {
-        if (getScrollbarWidth.value) {
-            return getScrollbarWidth.value;
+    this._getScrollbarWidth = () => {
+        if (this._scrollbarWidth) {
+            return this._scrollbarWidth;
         }
 
         const div = document.createElement("div");
@@ -36,13 +36,11 @@ function Modal(options = {}) {
         });
 
         document.body.appendChild(div);
-        const scrollbarWidth = div.offsetWidth - div.clientWidth;
+        this._scrollbarWidth = div.offsetWidth - div.clientWidth;
         document.body.removeChild(div);
 
-        getScrollbarWidth.value = scrollbarWidth;
-
-        return scrollbarWidth;
-    }
+        return this._scrollbarWidth;
+    };
 
     this._build = () => {
         const content = template.content.cloneNode(true);
@@ -127,7 +125,7 @@ function Modal(options = {}) {
 
         // Disable scroll
         document.body.classList.add("no-scroll");
-        document.body.style.paddingRight = getScrollbarWidth() + "px";
+        document.body.style.paddingRight = this._getScrollbarWidth() + "px";
 
         return this._backdrop;
     };
@@ -184,8 +182,10 @@ function Modal(options = {}) {
             }
 
             // Enable scroll
-            document.body.classList.remove("no-scroll");
-            document.body.style.paddingRight = "";
+            if (!Modal.elements.length) {
+                document.body.classList.remove("no-scroll");
+                document.body.style.paddingRight = "";
+            }
 
             if (typeof onClose === "function") onClose();
         });
