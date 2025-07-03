@@ -20,7 +20,7 @@ button {
     cursor: pointer;
 }
 
-.modal-backdrop {
+.uppo__backdrop {
     position: fixed;
     inset: 0;
     display: flex;
@@ -33,16 +33,16 @@ button {
     transition-duration: .3s;
 }
 
-.modal-backdrop.show {
+.uppo--show {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-backdrop.show .modal-container {
+.uppo--show .uppo__container {
     scale: 1;
 }
 
-.modal-container {
+.uppo__container {
     position: relative;
     background: #fff;
     width: min(600px, 90%);
@@ -52,7 +52,7 @@ button {
     transition: scale .3s;
 }
 
-.modal-close {
+.uppo__close {
     position: absolute;
     right: 10px;
     top: 5px;
@@ -64,11 +64,11 @@ button {
     transition: background .3s;
 }
 
-.modal-close:hover {
+.uppo__close:hover {
     background: #e4e4e4;
 }
 
-.modal-content {
+.uppo__content {
     max-height: 80vh;
     overflow-y: auto;
 }
@@ -83,14 +83,14 @@ main {
     border-radius: 8px;
 }
 
-.modal-footer {
+.uppo__footer {
     display: flex;
     justify-content: flex-end;
     padding: 20px 0;
     /* background: blue; */
 }
 
-.modal-btn {
+.uppo__btn {
     padding: 10px 20px;
     border-radius: 4px;
     background: #747373;
@@ -98,22 +98,22 @@ main {
     font-size: 1.6rem;
 }
 
-.modal-btn.primary {
+.uppo__btn--primary {
     background: #6bb2d9;
 }
 
-.modal-btn.danger {
+.uppo__btn--danger {
     background: #d27f4b;
 }
 
-.modal-btn:hover {
+.uppo__btn:hover {
     opacity: 0.9;
 }
 
-.modal-btn + .modal-btn {
+.uppo__btn + .uppo__btn {
     margin-left: 5px;
 }
 
-.no-scroll {
+.uppo--no-scroll {
     overflow-y: hidden;
 }

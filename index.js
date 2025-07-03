@@ -1,9 +1,9 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-Modal.elements = [];
+Uppo.elements = [];
 
-function Modal(options = {}) {
+function Uppo(options = {}) {
     this.opt = Object.assign(
         {
             closeMethods: ["button", "overlay", "escape"],
@@ -30,7 +30,7 @@ function Modal(options = {}) {
     this._handleEscapeKey = this._handleEscapeKey.bind(this);
 }
 
-Modal.prototype._getScrollbarWidth = function () {
+Uppo.prototype._getScrollbarWidth = function () {
     if (this._scrollbarWidth) {
         return this._scrollbarWidth;
     }
@@ -49,15 +49,15 @@ Modal.prototype._getScrollbarWidth = function () {
     return this._scrollbarWidth;
 };
 
-Modal.prototype._build = function () {
+Uppo.prototype._build = function () {
     const content = this.template.content.cloneNode(true);
 
     // Create modal Element
     this._backdrop = document.createElement("div");
-    this._backdrop.className = "modal-backdrop";
+    this._backdrop.className = "uppo__backdrop";
 
     const container = document.createElement("div");
-    container.className = "modal-container";
+    container.className = "uppo__container";
 
     this.opt.cssClass.forEach((className) => {
         if (typeof className === "string") {
@@ -66,7 +66,7 @@ Modal.prototype._build = function () {
     });
 
     if (this.allowButtonClose) {
-        const closeBtn = this._createButton("&times;", "modal-close", () =>
+        const closeBtn = this._createButton("&times;", "uppo__close", () =>
             this.close()
         );
 
@@ -74,7 +74,7 @@ Modal.prototype._build = function () {
     }
 
     const modalContent = document.createElement("div");
-    modalContent.className = "modal-content";
+    modalContent.className = "uppo__content";
 
     // Append content and Element
     modalContent.append(content);
@@ -82,7 +82,7 @@ Modal.prototype._build = function () {
 
     if (this.opt.footer) {
         this._modalFooter = document.createElement("div");
-        this._modalFooter.className = "modal-footer";
+        this._modalFooter.className = "uppo__footer";
 
         this._renderFooterContent();
 
@@ -95,15 +95,15 @@ Modal.prototype._build = function () {
     document.body.append(this._backdrop);
 };
 
-Modal.prototype.open = function () {
-    Modal.elements.push(this);
+Uppo.prototype.open = function () {
+    Uppo.elements.push(this);
 
     if (!this._backdrop) {
         this._build();
     }
 
     setTimeout(() => {
-        this._backdrop.classList.add("show");
+        this._backdrop.classList.add("uppo--show");
     }, 0);
 
     if (this.allowBackdropClose) {
@@ -121,15 +121,15 @@ Modal.prototype.open = function () {
     this._onTransitionEnd(this.opt.onOpen);
 
     // Disable scroll
-    document.body.classList.add("no-scroll");
+    document.body.classList.add("uppo--no-scroll");
     document.body.style.paddingRight = this._getScrollbarWidth() + "px";
 
     return this._backdrop;
 };
 
-Modal.prototype._handleEscapeKey = function (e) {
+Uppo.prototype._handleEscapeKey = function (e) {
     if (e.key === "Escape") {
-        const lastModal = Modal.elements[Modal.elements.length - 1];
+        const lastModal = Uppo.elements[Uppo.elements.length - 1];
 
         if (lastModal === this) {
             this.close();
@@ -137,25 +137,25 @@ Modal.prototype._handleEscapeKey = function (e) {
     }
 };
 
-Modal.prototype.setFooterContent = function (html) {
+Uppo.prototype.setFooterContent = function (html) {
     this._footerContent = html;
     this._renderFooterContent();
 };
 
-Modal.prototype.addFooterButton = function (title, cssClass, callback) {
+Uppo.prototype.addFooterButton = function (title, cssClass, callback) {
     const button = this._createButton(title, cssClass, callback);
     this._footerButtons.push(button);
 
     this._renderFooterButton();
 };
 
-Modal.prototype._renderFooterContent = function () {
+Uppo.prototype._renderFooterContent = function () {
     if (this._modalFooter && this._footerContent) {
         this._modalFooter.innerHTML = this._footerContent;
     }
 };
 
-Modal.prototype._renderFooterButton = function () {
+Uppo.prototype._renderFooterButton = function () {
     if (this._modalFooter) {
         this._footerButtons.forEach((btn) => {
             this._modalFooter.append(btn);
@@ -163,7 +163,7 @@ Modal.prototype._renderFooterButton = function () {
     }
 };
 
-Modal.prototype._createButton = function (title, cssClass, callback) {
+Uppo.prototype._createButton = function (title, cssClass, callback) {
     const button = document.createElement("button");
     button.className = cssClass;
     button.innerHTML = title;
@@ -172,17 +172,17 @@ Modal.prototype._createButton = function (title, cssClass, callback) {
     return button;
 };
 
-Modal.prototype._onTransitionEnd = function (callback) {
+Uppo.prototype._onTransitionEnd = function (callback) {
     this._backdrop.ontransitionend = (e) => {
         if (e.propertyName !== "opacity") return;
         if (typeof callback === "function") callback();
     };
 };
 
-Modal.prototype.close = function (destroy = this.opt.destroyOnClose) {
-    Modal.elements.pop();
+Uppo.prototype.close = function (destroy = this.opt.destroyOnClose) {
+    Uppo.elements.pop();
 
-    this._backdrop.classList.remove("show");
+    this._backdrop.classList.remove("uppo--show");
 
     if (this.allowEscapesClose) {
         document.removeEventListener("keydown", this._handleEscapeKey);
@@ -196,8 +196,8 @@ Modal.prototype.close = function (destroy = this.opt.destroyOnClose) {
         }
 
         // Enable scroll
-        if (!Modal.elements.length) {
-            document.body.classList.remove("no-scroll");
+        if (!Uppo.elements.length) {
+            document.body.classList.remove("uppo--no-scroll");
             document.body.style.paddingRight = "";
         }
 
@@ -205,11 +205,11 @@ Modal.prototype.close = function (destroy = this.opt.destroyOnClose) {
     });
 };
 
-Modal.prototype.destroy = function () {
+Uppo.prototype.destroy = function () {
     this.close(true);
 };
 
-const modal1 = new Modal({
+const modal1 = new Uppo({
     templateId: "modal-1",
     // destroyOnClose: false,
     onOpen: () => {
@@ -223,7 +223,7 @@ const modal1 = new Modal({
 $("#open-modal-1").onclick = () => {
     modal1.open();
 };
-const modal2 = new Modal({
+const modal2 = new Uppo({
     templateId: "modal-2",
     footer: true,
     // cssClass: ["class1", "class2"],
@@ -250,7 +250,7 @@ $("#open-modal-2").onclick = () => {
     }
 };
 
-const modal3 = new Modal({
+const modal3 = new Uppo({
     templateId: "modal-3",
     footer: true,
     cssClass: ["class1", "class2"],
@@ -263,18 +263,22 @@ const modal3 = new Modal({
     // destroyOnClose: false,
 });
 
-modal3.addFooterButton("Danger", "modal-btn danger", (e) => {
+modal3.addFooterButton("Danger", "uppo__btn uppo__btn--danger", (e) => {
     modal3.close();
 });
 
-modal3.addFooterButton("Cancel", "modal-btn", (e) => {
+modal3.addFooterButton("Cancel", "uppo__btn", (e) => {
     modal3.close();
 });
 
-modal3.addFooterButton("<span>Agree</span>", "modal-btn primary", (e) => {
-    // Something...
-    modal3.close();
-});
+modal3.addFooterButton(
+    "<span>Agree</span>",
+    "uppo__btn uppo__btn--primary",
+    (e) => {
+        // Something...
+        modal3.close();
+    }
+);
 
 $("#open-modal-3").onclick = () => {
     modal3.open();
