@@ -25,14 +25,15 @@
         <meta name="theme-color" content="#ffffff">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="./asset/css/reset.css">
+        <!-- <link rel="stylesheet" href="./asset/css/reset.css"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css">
         <link rel="stylesheet" href="./asset/css/styles.css">
         <title>Uppo Library</title>
     </head>
 
     <body>
         <header class="header">
-            <div class="heder__inner container">
+            <div class="heder__inner">
                 <a href="#!">
                     <img class="logo" src="./asset/images/logo.png" alt="Quý Leo">
                 </a>
@@ -45,6 +46,339 @@
                 </a>
             </div>
         </header>
+
+        <main class="container">
+            <section class="demo">
+                <h2 class="heading">
+                    <span class="number">1</span>
+                    Try It Out
+                </h2>
+                <p>
+                    Uppo is a lightweight <strong class="bold">modal library</strong> built with pure JavaScript.
+                    (<a href="https://github.com/quoc-quy/Uppo-Modal" target="_blank" class="demo__link">Source code
+                        available on
+                        GitHub</a>)
+                </p>
+                <ul class="demo__list">
+                    <li class="demo__item">No dependencies</li>
+                    <li class="demo__item">Fully customizable with CSS</li>
+                    <li class="demo__item">Supports CSS transitions</li>
+                    <li class="demo__item">Simple and intuitive API</li>
+                    <li class="demo__item">No extra files needed</li>
+                    <li class="demo__item">Optimized for user experience</li>
+                </ul>
+                <p>Here are some examples of how to use Uppo:</p>
+
+                <div class="demo__list-btn">
+                    <button class="btn-modal">Basic Modal</button>
+                    <button class="btn-modal"> Modal with Buttons</button>
+                    <button class="btn-modal">Large Content Modall</button>
+                    <button class="btn-modal">Footer-Only Close Modal</button>
+                    <button class="btn-modal"> Persistent Modal (Stays in DOM)</button>
+                    <button class="btn-modal"> Multiple Modals</button>
+                    <button class="btn-modal">YouTube Embed Modal</button>
+                </div>
+            </section>
+
+            <section class="installation">
+                <h2 class="heading">
+                    <span class="number">2</span>
+                    Installation
+                </h2>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th> Steps</th>
+                    </tr>
+                    <tr>
+                        <td>Direct Download</td>
+                        <td>
+                            <a href="https://github.com/quoc-quy/Uppo-Modal/archive/refs/heads/main.zip">Download
+                                ZIP</a>
+                            <p>Simply extract the ZIP file and use the <code class="accent">uppo.min.js</code> and
+                                <code class="accent">uppo.min.css</code> files
+                                in your
+                                project.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <p>Uppo provides a small CSS file that you can include directly via a CDN link. This makes it easy to
+                    integrate into your project and customize as needed</p>
+                <p>Include the Uppo JavaScript file in your project:</p>
+                <pre>
+                <code  class="language-html">
+&lt;script src=&quot;https://quoc-quy.github.io/Uppo-Modal/uppo.min.js&quot;&gt;&lt;/script&gt;</code>
+                </pre>
+                <p>Optionally, include the Uppo CSS file for default styling:</p>
+                <pre>
+                <code  class="language-html">
+&lt;link
+    rel=&quot;stylesheet&quot;
+    href=&quot;https://quoc-quy.github.io/Uppo-Modal/uppo.min.css&quot;
+&gt;</code>
+                </pre>
+                <p>You can explore the list of CSS classes used by Uppo in the <a href="#styling">Styling</a> section to
+                    easily customize them
+                    as needed.</p>
+                <p class="note"><i>You can use the <a href="#!">released</a> versions of Uppo available here.</i></p>
+            </section>
+
+            <section class="Usage">
+                <h2 class="heading">
+                    <span class="number">3</span>
+                    Usage
+                </h2>
+                <pre>
+                    <code class="language-js">
+// Initialize a new modal
+const modal = new Uppo({
+    content: &apos;&lt;h1&gt;This is content&lt;/h1&gt;&apos;,
+    // templateId: &apos;my-modal-template&apos;,
+    footer: true,
+    destroyOnClose: false,
+    closeMethods: [&apos;overlay&apos;, &apos;button&apos;, &apos;escape&apos;],
+    cssClass: [&apos;custom-class-1&apos;, &apos;custom-class-2&apos;],
+    onOpen: function() {
+        console.log(&apos;Modal opened&apos;);
+    },
+    onClose: function() {
+        console.log(&apos;Modal closed&apos;);
+    },
+});
+
+// Set modal content
+modal.setContent(&apos;&lt;h1&gt;This is new content&lt;/h1&gt;&apos;);
+
+// Add footer buttons
+modal.addFooterBtn(&apos;Cancel&apos;, &apos;btn btn--default&apos;, function(e) {
+    modal.close();
+});
+
+modal.addFooterBtn(&apos;Confirm&apos;, &apos;btn btn--primary&apos;, function(e) {
+    modal.close();
+});
+
+// Open the modal
+modal.open();
+
+// Close the modal
+modal.close();</code>
+                </pre>
+                <p>If you use <code class="accent">templateId</code>, ensure that a <code
+                        class="accent">&lt;template&gt;</code>
+                    element with the
+                    corresponding <code class="accent">id</code>
+                    exists in your
+                    HTML. Below is an example:</p>
+                <pre>
+                    <code class="language-html">
+&lt;template id=&quot;my-modal-template&quot;&gt;
+    &lt;div&gt;
+        &lt;h1&gt;This is modal content&lt;/h1&gt;
+        &lt;p&gt;You can add any HTML here.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</code>
+                </pre>
+                <p><strong>Note:</strong> When using <code class="accent">templateId</code>, do not provide <code
+                        class="accent">content</code>. If
+                    both are
+                    specified, <code class="accent">content</code>
+                    will take
+                    precedence, and <code class="accent">templateId</code> will be ignored.</p>
+
+            </section>
+
+            <section class="options">
+                <h2 class="heading">
+                    <span class="number">4</span>
+                    Options
+                </h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th> Type</th>
+                            <th> Description</th>
+                        </tr>
+                    </thead>
+                    <!-- <code class="accent">.uppo</code> -->
+                    <tbody>
+                        <tr>
+                            <td>content, templateId</td>
+                            <td>string</td>
+                            <td>One of <code class="accent">content</code> or <code class="accent">templateId</code> is
+                                required to set the modal
+                                content. <code class="accent">content</code> accepts an
+                                HTML string, while <code class="accent">templateId</code> specifies the ID of a template
+                                element. If both are
+                                provided, <code class="accent">content</code> will take precedence.</td>
+                        </tr>
+                        <tr>
+                            <td>cssClass</td>
+                            <td>array</td>
+                            <td>Custom CSS classes applied to the modal container (default: <code
+                                    class="accent">[]</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>footer</td>
+                            <td>boolean</td>
+                            <td>Shows a footer in the modal (default: <code class="accent">false</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>destroyOnClose</td>
+                            <td>boolean</td>
+                            <td>Decides whether the modal is removed from the DOM upon closing (default: <code
+                                    class="accent">true</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>closeMethods</td>
+                            <td>array</td>
+                            <td>Defines methods to close the modal (default: <code
+                                    class="accent">['overlay', 'button', 'escape']</code>)</td>
+                        </tr>
+                        <tr>
+                            <td>enableScrollLock</td>
+                            <td>boolean</td>
+                            <td>Enables or disables scroll locking when the modal is open. When set to <code
+                                    class="accent">true</code>, it prevents
+                                scrolling on the target element specified by <code
+                                    class="accent">scrollLockTarget</code>. Default: <code class="accent">true</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>scrollLockTarget</td>
+                            <td>function</td>
+                            <td>A callback that returns the element to apply scroll locking on. By default, it locks
+                                scrolling on <code class="accent">document.body</code>.</td>
+                        </tr>
+                        <tr>
+                            <td>onOpen</td>
+                            <td>function</td>
+                            <td>Callback function executed when the modal opens (after transition ends) (default:
+                                <code class="accent">undefined</code>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>onClose</td>
+                            <td>function</td>
+                            <td>Callback function executed when the modal closes (default: <code
+                                    class="accent">undefined</code>)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="styling" class="styling">
+                <h2 class="heading">
+                    <span class="number">5</span>
+                    Styling
+                </h2>
+                <p>Uppo styles are defined in CSS. You can fully customize it to meet your design requirements.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class Name</th>
+                            <th> Description/Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code class="accent">.uppo</code></td>
+                            <td>Styles the backdrop overlay for the modal. Handles positioning, centering the modal, and
+                                applying a semi-transparent background.</td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo--show</code></td>
+                            <td>Applied when the modal is visible. Controls the visibility and opacity of the backdrop.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo__container</code></td>
+                            <td>Styles the modal container, including its size, padding, border-radius, and transform
+                                animations for scaling in/out.</td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo__close</code></td>
+                            <td>Styles the close button inside the modal, including its size, position, and hover
+                                effects.</td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo__content</code></td>
+                            <td>Handles the modal's main content area, including scrollable behavior with a maximum
+                                height.</td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo__footer</code></td>
+                            <td>Styles the modal footer, aligning buttons to the right and adding spacing between them.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code class="accent">.uppo--no-scroll</code></td>
+                            <td>Disables scrolling on the target element specified by <code
+                                    class="accent">scrollLockTarget</code> when the modal is
+                                open.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>For more details, you can view the full CSS file directly here:
+                    <a target="_blank"
+                        href="https://github.com/quoc-quy/Uppo-Modal/blob/main/src/uppo.css">uppo.css</a>.
+                </p>
+            </section>
+
+            <section class="api">
+                <h2 class="heading">
+                    <span class="number">6</span>
+                    API
+                </h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th> Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>open()</td>
+                            <td>Opens the modal and triggers the <code class="accent">onOpen</code> callback.</td>
+                        </tr>
+                        <tr>
+                            <td>close()</td>
+                            <td>Closes the modal and triggers the <code class="accent">onClose</code> callback. If <code
+                                    class="accent">close(true)</code> is called, it behaves the
+                                same as <code class="accent">destroy()</code>, removing the modal from the DOM.</td>
+                        </tr>
+                        <tr>
+                            <td>setContent(content)</td>
+                            <td>Updates the modal content.</td>
+                        </tr>
+                        <tr>
+                            <td>setFooterContent(content)</td>
+                            <td>Updates the footer content.</td>
+                        </tr>
+                        <tr>
+                            <td>addFooterBtn(label, cssClass, callback)</td>
+                            <td>Adds a button to the footer with a callback function.</td>
+                        </tr>
+                        <tr>
+                            <td>destroy()</td>
+                            <td>Completely removes the modal elements from the DOM and unbinds all associated events.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>😍© Quý Leo❤️</p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     </body>
 
 </html>

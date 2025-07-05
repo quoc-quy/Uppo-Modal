@@ -6,6 +6,7 @@
 
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -13,10 +14,37 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+:root {
+    --primary-color: #0095ff;
+}
+
 .container {
     margin: 0 auto;
-    width: min(1160px, 100% - 48px);
+    width: min(80rem, 100% - 48px);
 }
+
+p, table {
+    margin: 1.5em 0;
+    line-height: 1.5;
+}
+
+button {
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+.btn-modal {
+    padding: 16px 25px;
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* =========================== Header ========================= */
 
 .header {
     padding: 50px 0;
@@ -27,6 +55,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: min(80%, 100% - 48px);
+    margin: 0 auto;
 }
 
 .logo {
@@ -46,10 +76,156 @@ body {
 
 .header__title {
     font-size: 4rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .header__desc {
     margin-top: 10px;
     font-size: 2rem;
+}
+
+/* =============================== Demo ==================== */
+
+.demo {
+    padding: 60px 0;
+}
+
+.heading {
+    position: relative;
+    padding: 10px 0;
+    font-size: 3rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.number {
+    position: absolute;
+    left: -44px;
+    top: 50%;
+    translate: 0 -50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+.bold {
+    font-weight: 700;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+.demo__list {
+    padding-left: 10px;
+    margin-top: 30px;
+}
+
+.demo__item {
+    list-style-type: disc;
+}
+
+.demo__item + .demo__item {
+    margin-top: 10px;
+}
+
+.demo__list-btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ======================== Installation ================= */
+
+table {
+    width: 100%;
+}
+
+tr {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2px;
+}
+
+.options tr {
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.api tr {
+    grid-template-columns: 2fr 3fr;
+}
+
+th, td {
+    padding: 10px;
+    background: #f8f8f8;
+    text-align: start;
+}
+
+tr td:not(:nth-last-child(1)) {
+    display: flex;
+    align-items: center;
+}
+
+th {
+    background: var(--primary-color);
+    font-weight: 700;
+    color: #fff;
+}
+
+code[class*=accent], td[class*=accent] {
+    padding: 2px 3px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+code[class*=language-], pre[class*=language-] {
+    line-height: 1.2;
+}
+
+.note {
+    padding-left: 20px;
+    border-left: 3px solid var(--primary-color);
+}
+
+tbody tr:nth-child(even) td {
+    background: #f0f0f0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+
+/* ========================= Responsive ==================== */
+
+@media (max-width: 540px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .header__desc {
+        text-align: center;
+    }
+
+    .logo-github {
+        position: absolute;
+        top: 0;
+        right: 50px;
+    }
+    
+    .btn-modal {
+        width: 100%;
+    }
 }
