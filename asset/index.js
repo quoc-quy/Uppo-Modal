@@ -73,3 +73,15 @@ const modal6 = new Uppo({
 $("#modal-btn-6").onclick = () => {
     modal6.open();
 };
+
+// ============================== modal-7 ===========================
+const modal7 = new Uppo({
+    templateId: "modal-7",
+    destroyOnClose: false,
+    content:
+        '<iframe width="560" height="315" src="https://www.youtube.com/embed/HmFXik5Yz64?si=d2WfqkX4GH25_jTl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+});
+
+$("#modal-btn-7").onclick = () => {
+    modal7.open();
+};
