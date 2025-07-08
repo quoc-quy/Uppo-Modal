@@ -74,3 +74,8 @@ $("#modal-btn-6").onclick = () => {
 };
 
 // ================================================================================
+
+const modal = new Uppo({
+    content: "<h1>Content Modal 1</h1>",
+    // templateId: "modal-1",
+});
