@@ -27,6 +27,7 @@
         <!-- CSS -->
         <!-- <link rel="stylesheet" href="./asset/css/reset.css"> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css">
+        <link rel="stylesheet" href="./src/uppo.css">
         <link rel="stylesheet" href="./asset/css/styles.css">
         <title>Uppo Library</title>
     </head>
@@ -70,13 +71,13 @@
                 <p>Here are some examples of how to use Uppo:</p>
 
                 <div class="demo__list-btn">
-                    <button class="btn-modal">Basic Modal</button>
-                    <button class="btn-modal"> Modal with Buttons</button>
-                    <button class="btn-modal">Large Content Modall</button>
-                    <button class="btn-modal">Footer-Only Close Modal</button>
-                    <button class="btn-modal"> Persistent Modal (Stays in DOM)</button>
-                    <button class="btn-modal"> Multiple Modals</button>
-                    <button class="btn-modal">YouTube Embed Modal</button>
+                    <button id="modal-btn-1" class="btn">Basic Modal</button>
+                    <button id="modal-btn-2" class="btn"> Modal with Buttons</button>
+                    <button id="modal-btn-3" class="btn">Large Content Modall</button>
+                    <button id="modal-btn-4" class="btn">Footer-Only Close Modal</button>
+                    <button id="modal-btn-5" class="btn"> Persistent Modal (Stays in DOM)</button>
+                    <button id="modal-btn-6" class="btn"> Multiple Modals</button>
+                    <button id="modal-btn-7" class="btn">YouTube Embed Modal</button>
                 </div>
             </section>
 
@@ -377,8 +378,69 @@ modal.close();</code>
             <p>😍© Quý Leo❤️</p>
         </footer>
 
+        <!-- ======================= Modal-1 ==================================== -->
+        <template id="modal-1">
+            <h1>Basic Modal</h1>
+            <p>This is a simple modal. You can customize its content as per your requirements.</p>
+        </template>
+
+        <!-- ======================= Modal-2 ==================================== -->
+        <template id="modal-2">
+            <h1>Basic Modal</h1>
+            <p>This is a simple modal. You can customize its content as per your requirements.</p>
+        </template>
+
+        <!-- ======================= Modal-3 ==================================== -->
+        <template id="modal-3">
+            <h1>Large Content Modal</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed harum vel odio qui magni est reprehenderit
+                quos sequi animi molestiae!</p>
+        </template>
+
+        <!-- ======================= Modal-4 ==================================== -->
+        <template id="modal-4">
+            <h1>Footer-Only Close Modal</h1>
+            <p>This modal can only be closed via the button in the footer for a controlled experience.</p>
+        </template>
+
+        <!-- ======================= Modal-5 ==================================== -->
+        <template id="modal-5">
+            <h1>Persistent Modal</h1>
+            <p>This modal stays in the DOM even after being closed, allowing you to reopen it without losing any
+                changes.</p>
+            <p>You can write something in the input below, close the modal, and reopen it to see the content still
+                intact.</p>
+            <input class="modal-input" type="text" placeholder="Type something here...">
+        </template>
+
+        <!-- ======================= Modal-6 ==================================== -->
+        <template id="modal-6">
+            <h1>Multiple Modals</h1>
+            <p>This modal demonstrates interaction between multiple modals. You can open another modal from here.</p>
+            <button class="btn" onclick="modal1.open()">Open Basic Modal</button>
+        </template>
+
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+        <script src="./src/uppo.js"></script>
+        <script src="./asset/index.js"></script>
     </body>
 
 </html>
