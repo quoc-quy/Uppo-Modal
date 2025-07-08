@@ -4,6 +4,7 @@ const $$ = document.querySelectorAll.bind(document);
 // ============================== modal-1 ===========================
 const modal1 = new Uppo({
     templateId: "modal-1",
+    // enableScrollLock: false,
 });
 
 $("#modal-btn-1").onclick = () => {
@@ -72,10 +73,3 @@ const modal6 = new Uppo({
 $("#modal-btn-6").onclick = () => {
     modal6.open();
 };
-
-// ================================================================================
-
-const modal = new Uppo({
-    content: "<h1>Content Modal 1</h1>",
-    // templateId: "modal-1",
-});

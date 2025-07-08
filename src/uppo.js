@@ -28,6 +28,8 @@ function Uppo(options = {}) {
             cssClass: [],
             destroyOnClose: true,
             footer: false,
+            enableScrollLock: true,
+            scrollLockTarget: () => document.body,
         },
         options
     );
@@ -140,10 +142,32 @@ Uppo.prototype.open = function () {
     this._onTransitionEnd(this.opt.onOpen);
 
     // Disable scroll
-    document.body.classList.add("uppo--no-scroll");
-    document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    if (Uppo.elements.length === 1 && this.opt.enableScrollLock) {
+        const target = this.opt.scrollLockTarget();
+
+        if (this._hasScrollbar(target)) {
+            target.classList.add("uppo--no-scroll");
+
+            const targetPadRight = parseFloat(
+                getComputedStyle(target).paddingRight
+            );
+            target.style.paddingRight =
+                targetPadRight + this._getScrollbarWidth() + "px";
+        }
+    }
 
     return this._backdrop;
+};
+
+Uppo.prototype._hasScrollbar = (target) => {
+    if ([document.documentElement, document.body].includes(target)) {
+        return (
+            document.documentElement.scrollHeight >
+                document.documentElement.clientHeight ||
+            document.body.scrollHeight > document.body.clientHeight
+        );
+    }
+    return target.scrollHeight > target.clientHeight;
 };
 
 Uppo.prototype._handleEscapeKey = function (e) {
@@ -223,9 +247,13 @@ Uppo.prototype.close = function (destroy = this.opt.destroyOnClose) {
         }
 
         // Enable scroll
-        if (!Uppo.elements.length) {
-            document.body.classList.remove("uppo--no-scroll");
-            document.body.style.paddingRight = "";
+        if (this.opt.enableScrollLock && !Uppo.elements.length) {
+            const target = this.opt.scrollLockTarget();
+
+            if (this._hasScrollbar(target)) {
+                target.classList.remove("uppo--no-scroll");
+                target.style.paddingRight = "";
+            }
         }
 
         if (typeof this.opt.onClose === "function") this.opt.onClose();

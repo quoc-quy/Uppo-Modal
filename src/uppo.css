@@ -40,6 +40,9 @@
     font-size: 2rem;
     background: #f3f3f3;
     transition: background .3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
 .uppo__close:hover {
